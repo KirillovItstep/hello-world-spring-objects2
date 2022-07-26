@@ -2,17 +2,18 @@ package org.itstep.helloworldspringobjects2;
 
 import org.itstep.helloworldspringobjects2.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class UserController {
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping("/")
     public String index(){
@@ -26,6 +27,11 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public User getUserById(@PathVariable Long id){
+        return userService.getUser(id);
+    }
+
+    @GetMapping(value="/user")
+    public User getUserById2(@RequestParam("id") long id){
         return userService.getUser(id);
     }
 }

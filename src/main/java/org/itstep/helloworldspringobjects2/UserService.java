@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -26,4 +25,5 @@ public User getUser(Long id){
             .findFirst().orElse(null);
     return user;
 }
+
 }
